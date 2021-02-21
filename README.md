@@ -52,5 +52,63 @@ Bison sections:
 2. Token declaration - %token
 3. Type declaration - breaks down tokens
 4. Your union (yyval) declaration.
+5. Grammer...
+
+### Grammer
+
+```
+
+Tokens -
+ - Number (NUM)  :  [0-9]+
+ - Operation (OP): [+,-,*,/]
+ - Equal (EQU)   : [=]
+
+So, what about:
+
+// recognize equation?
+12 + 5 = 17
+NUM + NUM = NUM
+
+But maybe not +, could be another.. so 
+
+NUM OP NUM = NUM
+
+But, = ? lets token that too
+
+NUM OP NUM EQU NUM
+
+But, there is a problem.
+
+12 + 5 = 6 + 11
+
+The grammer wont handle that
+Need:
+
+NUM OP NUM EQU NUM OP NUM
+
+Will not work for both.
+
+Ok, so how do we manage this?
+
+Lets define, based on previous, and apply an OR (|):
+- Statement (STMT) : NUM OP NUM | NUM
+
+Ok, so STMT EQU STMT covers our previous examples
+
+What about:
+
+12+5+1+1 = 16+1
+
+STMT OP STMT EQU STMT
+
+
+This becomes
+
+STMT EQU STMT
+
+Hmm. A better solution is:
+
+- Statement (STMT) : STMT OP NUM | NUM
+
 
 

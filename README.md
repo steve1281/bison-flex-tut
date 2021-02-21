@@ -1,8 +1,8 @@
 # Flex/Bison Tutorial
 
-link: https://www.youtube.com/watch?v=pu0hX5lftQU  (sanwade)
+link to source tutorial I used: https://www.youtube.com/watch?v=pu0hX5lftQU  (sanwade)
 
-## why?
+## Why do this?
 
 ```
 Its been a long time since I have used yacc and lex. So long in fact they were still called yacc and lex :-)
@@ -37,7 +37,7 @@ I didn't have these in my C++ Dev box, so I grabbed them.
  which bison /*Sanity check to make sure bison is installed*/
 ```
 
-## about flex
+## About flex
 
 ```
 create a test.l (l == lex) 
@@ -53,6 +53,7 @@ Lex code has four (4) major sections
 ```
 yytext - happens to be the varible you get when you enter anything into the lex 
 yyval - this is the union you will declare in your y file below.  
+```
 
 ## about bison
 

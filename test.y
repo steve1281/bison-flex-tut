@@ -38,4 +38,15 @@ stmt:
 %%
 
 
+int yyerror(char *s) 
+{
+    printf("Syntax Error on line %s\n", s); 
+    return 0;
+}
+
+int main()
+{
+    yyparse();
+    return 0;
+}
 

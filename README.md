@@ -2,6 +2,19 @@
 
 link: https://www.youtube.com/watch?v=pu0hX5lftQU  (sanwade)
 
+## why?
+
+```
+Its been a long time since I have used yacc and lex. So long in fact they were still called yacc and lex :-)
+
+I have been looking at some parsing compilation approaches, and needed a refresher.  I have written a number of 
+lexical analyzers --> parsers by hand, but it rapidly becomes complex and better tools are needed.
+
+So, I found this (relatively) simple example online, and thought to give a try.
+
+The development environment is ubuntu, I already do C++ development on it so all my C like tools are in place.
+(Needed to grab bison and flex, see below)
+```
 
 ## About the names
 
@@ -12,8 +25,9 @@ GNU created Bison and FLEX from these.
 
 ```
 
-
 ## Install flex and bison (ubuntu)
+
+I didn't have these in my C++ Dev box, so I grabbed them.
 
 ```
  sudo apt-get update
@@ -146,3 +160,46 @@ Imagine it was :
  30         printf("You entered a string - %s\n", $1);
  31     }
 ```
+
+### Finishing up
+
+Add the error handler and a main to the yacc (bison) file:
+
+```
+
+int yyerror(char *s) 
+{
+    printf("Syntax Error on line %s\n", s); 
+    return 0;
+}
+
+int main()
+{
+    yyparse();
+    return 0;
+}
+
+```
+
+Add a Makefile:
+
+```
+$ cat Makefile 
+default:
+	clear
+	flex -l test.l
+	bison -dv test.y 
+	gcc -o test test.tab.c lex.yy.c -lfl
+```
+
+Note the files you actually need are:
+
+```
+  Makefile
+  test.l
+  test.y
+```
+Everything else is an artifact of compilation.
+
+# not a terrible way to spend a Sunday afternoon :-)
+

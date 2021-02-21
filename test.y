@@ -17,4 +17,25 @@ int yyerror(char *s);
     int number;
 }
 
+%%
+prog:
+    stmts
+;
+
+stmts:
+     | stmt SEMICOLON stmts
+
+stmt:
+    STRING {
+        printf("You entered a string - %s\n", $1);
+    }
+    | NUM {
+        printf("The number you entered is - %d", $1);
+    }
+    | OTHER
+;
+
+%%
+
+
 

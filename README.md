@@ -111,4 +111,38 @@ Hmm. A better solution is:
 - Statement (STMT) : STMT OP NUM | NUM
 
 
+```
 
+### Specific grammer for test
+
+```
+
+STMTS : | STMT SEMICOLON STMTS 
+STRING
+NUM
+OTH
+SEMICOLON
+STMT : STRING | NUM | OTH
+
+Then we scan for STMTS....
+
+NOTE:  ": |"  means Null is ok.
+```
+
+
+Note about the $# naming...
+
+```
+ 28 stmt:
+ 29     STRING {
+ 30         printf("You entered a string - %s\n", $1);
+ 31     }
+
+Why $1?
+Imagine it was :
+ 28 stmt:
+         $1     $2   $3
+ 29     STRING NUM STRING {
+ 30         printf("You entered a string - %s\n", $1);
+ 31     }
+```
